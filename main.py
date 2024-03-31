@@ -154,7 +154,7 @@ def win_inter():
     win_inter.geometry("960x480")
     win_inter.resizable(False, False)
     win_inter.config(bg=colorMain)
-    win_inter.iconbitmap("withoutMouse-system/images/hand.ico")
+    win_inter.iconbitmap("./images/hand.ico")
     centrar_ventana(win_inter)
 
     # Etiquetas
@@ -172,8 +172,8 @@ def win_inter():
     txt_url.place(x=75, y=170, width=810, height=80)
 
     # Botones
-    btn_go = tk.Button(win_inter, text="Ir", font=(fontGUI, 20), bd=0, bg="tomato", fg="white", command=lambda:ir())
-    btn_back = tk.Button(win_inter, text="Regresar", font=(fontGUI, 20), bd=0, bg="green", fg="white", command=lambda:regret())
+    btn_go = tk.Button(win_inter, text="Ir", font=(fontGUI, 20), bd=0, bg="tomato", fg="white", cursor = "hand2", command=lambda:ir())
+    btn_back = tk.Button(win_inter, text="Regresar", font=(fontGUI, 20), bd=0, bg="green", fg="white", cursor = "hand2", command=lambda:regret())
 
     # Posicionamiento de los botones
     btn_go.place(x=400, y=280, width=160, height=80)
@@ -209,7 +209,7 @@ def counter():
     win_counter.geometry("960x480")
     win_counter.resizable(False, False)
     win_counter.config(bg=colorMain)
-    win_counter.iconbitmap("withoutMouse-system/images/hand.ico")
+    win_counter.iconbitmap("./images/hand.ico")
     centrar_ventana(win_counter)
 
     # Etiquetas
@@ -223,9 +223,9 @@ def counter():
     lbl_count.place(x=380, y=220, width=200, height=100)
 
     # Botones
-    btn_sumar = tk.Button(win_counter, text="+", font=(fontGUI, 60),fg="black",bg=colorMain, bd=0, command=lambda:sumar())
-    btn_restar = tk.Button(win_counter, text="-", font=(fontGUI, 60),fg="black",bg=colorMain, bd=0, command=lambda:restar())
-    btn_back = tk.Button(win_counter, text="Regresar", font=(fontGUI, 20), bd=0, bg="green", fg="white", command=lambda:regret())
+    btn_sumar = tk.Button(win_counter, text="+", font=(fontGUI, 60),fg="black",bg=colorMain, bd=0, cursor = "hand2", command=lambda:sumar())
+    btn_restar = tk.Button(win_counter, text="-", font=(fontGUI, 60),fg="black",bg=colorMain, bd=0, cursor = "hand2", command=lambda:restar())
+    btn_back = tk.Button(win_counter, text="Regresar", font=(fontGUI, 20), bd=0, bg="green", fg="white", cursor = "hand2", command=lambda:regret())
 
     # Posicionamiento de los botones
     btn_restar.place(x=160, y=220, width=200, height=100)
@@ -244,17 +244,17 @@ win_main.geometry("960x480")
 win_main.resizable(False, False)
 # win_main.overrideredirect(True) # Eliminar la barra de título
 win_main.config(bg=colorMain)
-win_main.iconbitmap("withoutMouse-system/images/hand.ico")
+win_main.iconbitmap("./images/hand.ico")
 centrar_ventana(win_main)
 
 # Imagenes
-img_note = tk.PhotoImage(file="withoutMouse-system/images/note.png")
+img_note = tk.PhotoImage(file="./images/note.png")
 img_note = img_note.subsample(3)
-img_calc = tk.PhotoImage(file="withoutMouse-system/images/calc.png")
+img_calc = tk.PhotoImage(file="./images/calc.png")
 img_calc = img_calc.subsample(3)
-img_inter = tk.PhotoImage(file="withoutMouse-system/images/inter.png")
+img_inter = tk.PhotoImage(file="./images/inter.png")
 img_inter = img_inter.subsample(3)
-img_counter = tk.PhotoImage(file="withoutMouse-system/images/contador.png")
+img_counter = tk.PhotoImage(file="./images/contador.png")
 img_counter = img_counter.subsample(3)
 
 # Etiquetas
@@ -266,11 +266,11 @@ lbl_title.place(x=0, y=0, width=960, height=100)
 lbl_menu.place(x=0, y=100, width=960, height=50)
 
 # Botones
-btn_note = tk.Button(win_main,image = img_note, bg = colorMain, bd=0, command=lambda:note())
-btn_calc = tk.Button(win_main,image = img_calc, bg = colorMain, bd=0, command=lambda:calc())
-btn_inter = tk.Button(win_main,image = img_inter, bg = colorMain, bd=0, command=lambda:win_inter())
-btn_counter = tk.Button(win_main,image = img_counter, bg = colorMain, bd=0, command=lambda:counter())
-btn_exit = tk.Button(win_main, text="Exit", font=(fontGUI, 20), bd=0, bg="red", fg="white", command=lambda:win_main.destroy())
+btn_note = tk.Button(win_main,image = img_note, bg = colorMain, bd=0, cursor = "hand2", command=lambda:note())
+btn_calc = tk.Button(win_main,image = img_calc, bg = colorMain, bd=0, cursor = "hand2", command=lambda:calc())
+btn_inter = tk.Button(win_main,image = img_inter, bg = colorMain, bd=0, cursor = "hand2", command=lambda:win_inter())
+btn_counter = tk.Button(win_main,image = img_counter, bg = colorMain, bd=0, cursor = "hand2", command=lambda:counter())
+btn_exit = tk.Button(win_main, text="Exit", font=(fontGUI, 20), bd=0, bg="red", fg="white", cursor = "hand2", command=lambda:win_main.destroy())
 
 # Posicionamiento de los botones
 btn_note.place(x=32, y=170, width=200, height=200)
