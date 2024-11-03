@@ -8,10 +8,10 @@ import subprocess # Abrir apps
 import webbrowser # Abrir sitios web
 import cv2 # Para la cámara
 import mediapipe as mp # Para la detección de manos
-import mediapipe as mp # Para la detección de manos
 import numpy as np # Para la detección de manos
 import pyautogui # Para el control del mouse
 import threading # Para los subprocesos
+import time # Para el delay
 
 # Constantes
 fontGUI = "Times New Roman"
@@ -33,14 +33,17 @@ def mouse_control():
     mp_hands = mp.solutions.hands
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
     color_mouse_pointer = (255, 0, 255)
+    click_delay = 0.3  # Tiempo en segundos de espera entre clics
 
-    # Rectangulo donde se moverá el mouse (en pixeles y considerando una resolucion FULL HD)
-    SCREEN_GAME_X_INI = 480
-    SCREEN_GAME_Y_INI = 270
-    SCREEN_GAME_X_FIN = 480 + 960
-    SCREEN_GAME_Y_FIN = 270 + 540
+    # Se obtiene la resolución de la pantalla donde se moverá el mouse
+    root = tk.Tk()
+    SCREEN_GAME_X_INI = 0
+    SCREEN_GAME_Y_INI = 0
+    SCREEN_GAME_X_FIN = root.winfo_screenwidth()
+    SCREEN_GAME_Y_FIN = root.winfo_screenheight()
+    root.destroy()
 
-    X_Y_INI = 100 # Distancia del rectangulo a los bordes de la pantalla
+    X_Y_INI = 0 # Distancia del rectangulo a los bordes de la pantalla
 
     # Función para calcular la distancia entre dos puntos
     def calculate_distance(x1, y1, x2, y2):
@@ -106,19 +109,22 @@ def mouse_control():
 
             # Detección de las manos
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
             results = hands.process(frame_rgb)
             
             # Dibujar el mouse pointer
             if results.multi_hand_landmarks is not None:
+
                 for hand_landmarks in results.multi_hand_landmarks:
                     x = int(hand_landmarks.landmark[9].x * width)
                     y = int(hand_landmarks.landmark[9].y * height)
                     xm = np.interp(x, (X_Y_INI, X_Y_INI + area_width), (SCREEN_GAME_X_INI, SCREEN_GAME_X_FIN))
                     ym = np.interp(y, (X_Y_INI, X_Y_INI + area_height), (SCREEN_GAME_Y_INI, SCREEN_GAME_Y_FIN))
                     pyautogui.moveTo(int(xm), int(ym))
+
                     if detect_finger_down(hand_landmarks):
                         pyautogui.click()
+                        time.sleep(click_delay)
+
                     cv2.circle(output, (x, y), 10, color_mouse_pointer, 3)
                     cv2.circle(output, (x, y), 5, color_mouse_pointer, -1)
 
@@ -126,10 +132,10 @@ def mouse_control():
             # Cancelar el ciclo con la tecla ESC
             if cv2.waitKey(1) & 0xFF == 27:
                 break
+
     # Liberar la cámara
     cap.release()
     cv2.destroyAllWindows()
-
 
 # Ventana del navegador
 def win_inter():
